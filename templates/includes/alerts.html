@@ -1,6 +1,7 @@
 {% if messages %}
     {% for message in messages %}
-        <div class="alert alert-{{message.tags}} show-notification" role="alert">
+        <div style="position: fixed; bottom: 100%; right: 20px; animation-name: show-toast; animation-duration: 8s; z-index: 99;"
+             class="alert alert-{{message.tags}} show-notification" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
