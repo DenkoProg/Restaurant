@@ -27,7 +27,7 @@ def check_role_customer(user):
 
 def registerUser(request):
     if request.user.is_authenticated:
-        # messages.warning(request, 'You are already logged in!')
+        messages.warning(request, 'You are already logged in!')
         return redirect('myAccount')
     elif request.method == 'POST':
         form = UserForm(request.POST)
@@ -39,7 +39,7 @@ def registerUser(request):
             user.save()
 
             # Send verification email
-            # send_verification_email(request, user)
+            send_verification_email(request, user)
 
             messages.success(request, "Your account has been registered successfully")
             return redirect('registerUser')
@@ -55,7 +55,7 @@ def registerUser(request):
 
 def registerVendor(request):
     if request.user.is_authenticated:
-        # messages.warning(request, 'You are already logged in!')
+        messages.warning(request, 'You are already logged in!')
         return redirect('myAccount')
     elif request.method == 'POST':
         form = UserForm(request.POST)
@@ -66,7 +66,9 @@ def registerVendor(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
+
             user.role = User.VENDOR
             user.save()
             vendor = v_form.save(commit=False)
@@ -76,16 +78,17 @@ def registerVendor(request):
             vendor.save()
 
             # Send verification email
-            # send_verification_email(request, user)
+            send_verification_email(request, user)
 
             messages.success(request, "Your account has been registered successfully. Please wait for approval!")
             return redirect("registerVendor")
         else:
+            messages.error(request, form.errors)
             print(form.errors)
+            print(v_form.errors)
     else:
         form = UserForm()
         v_form = VendorForm()
-
 
     context = {
         'form': form,
