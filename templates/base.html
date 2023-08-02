@@ -28,11 +28,16 @@
 	<link rel="stylesheet" href="{% static 'css/custom.css' %}" />
 
 	<!-- GOOGLE MAPS -->
+	{% if '/profile/' in request.GET %}
 	<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places&callback=initAutoComplete" async defer></script>
+	{% endif %}
 	<script src="{% static 'js/custom.js' %}"></script>
 
 	<!-- FONT AWESOME -->
 	<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
+	<!-- SWEETALERT -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<style>
 		body, .main-section p, .mce-content-body p{
