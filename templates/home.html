@@ -26,7 +26,8 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
                                     <div class="field-holder">
-                                        <input style="color: #000000 !important;" type="text" name="keyword" placeholder="Resturant name or food name">
+                                        <input style="color: #000000 !important;" type="text" name="keyword"
+                                               placeholder="Resturant name or food name">
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
@@ -36,7 +37,8 @@
                                                 <div class="foodbakery-locations-fields-group foodbakery-focus-out">
                                                     <span class="foodbakery-search-location-icon"><i
                                                             class="icon-location"></i></span>
-                                                    <input style="color: #000000 !important;" type="text" name="address" class="location-field-text filter"
+                                                    <input style="color: #000000 !important;" type="text" name="address"
+                                                           class="location-field-text filter"
                                                            placeholder="All Locations" required id="id_address">
                                                     <input type="hidden" name="lat" value="" id="id_latitude">
                                                     <input type="hidden" name="lng" value="" id="id_longitude">
@@ -91,10 +93,10 @@
                             <li class="has-border">
                                 <figure>
                                     {% if vendor.user_profile.profile_picture %}
-                                    <a href="#"><img src="{{vendor.user_profile.profile_picture.url}}"
+                                    <a href="{% url 'vendor_detail' vendor.vendor_slug %}"><img src="{{vendor.user_profile.profile_picture.url}}"
                                                      class="attachment-full size-full wp-post-image" alt=""></a>
                                     {% else %}
-                                    <a href="#"><img src="{% static 'images/default-profile.png' %}"
+                                    <a href="{% url 'vendor_detail' vendor.vendor_slug %}"><img src="{% static 'images/default-profile.png' %}"
                                                      class="attachment-full size-full wp-post-image" alt=""></a>
                                     {% endif %}
                                 </figure>
@@ -126,7 +128,7 @@
                                 <div class="list-post featured">
                                     <div class="img-holder">
                                         <figure>
-                                            <a href="#">
+                                            <a href="{% url 'vendor_detail' vendor.vendor_slug %}">
                                                 {% if vendor.user_profile.profile_picture %}
                                                 <img src="{{vendor.user_profile.profile_picture.url}}"
                                                      class="attachment-full size-full wp-post-image" alt="">
@@ -148,6 +150,12 @@
                                         {% if vendor.user_profile.city and vendor.user_profile.state and vendor.user_profile.pin_code %}
                                         <span>{{ vendor.user_profile.city }}, {{ vendor.user_profile.state }}, {{ vendor.user_profile.pin_code }}</span>
                                         {% endif %}
+
+                                        {% if vendor.kms %}
+                                        <br>
+                                        <span><small><b>{{vendor.kms}} km </b> away</small></span>
+                                        {% endif %}
+
                                     </div>
 
 
