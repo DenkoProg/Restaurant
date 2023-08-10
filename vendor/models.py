@@ -18,6 +18,7 @@ class Vendor(models.Model):
         return self.vendor_name
 
     def is_open(self):
+
         today_date = date.today()
         today = today_date.isoweekday()
         current_opening_hours = OpeningHour.objects.filter(vendor=self, day=today)
@@ -27,13 +28,14 @@ class Vendor(models.Model):
 
         is_open = None
         for i in current_opening_hours:
-            start = str(datetime.strptime(i.from_hour, "%I:%M %p").time())
-            end = str(datetime.strptime(i.to_hour, "%I:%M %p").time())
-            if current_time > start and current_time < end:
-                is_open = True
-                break
-            else:
-                is_open = False
+            if not i.is_closed:
+                start = str(datetime.strptime(i.from_hour, "%I:%M %p").time())
+                end = str(datetime.strptime(i.to_hour, "%I:%M %p").time())
+                if current_time > start and current_time < end:
+                    is_open = True
+                    break
+                else:
+                    is_open = False
         return is_open
 
 DAYS = [
