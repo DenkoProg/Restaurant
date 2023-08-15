@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from accounts.forms import UserProfileForm, UserInfoForm
 from accounts.models import UserProfile
@@ -11,7 +11,7 @@ def cprofile(request):
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
         user_form = UserInfoForm(request.POST, instance=request.user)
-        if profile.form.is_valid() and user_form.is_valid():
+        if profile_form.is_valid() and user_form.is_valid():
             profile_form.save()
             user_form.save()
             messages.success(request, 'Profile updated')

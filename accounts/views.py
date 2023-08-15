@@ -7,6 +7,9 @@ from vendor.forms import VendorForm
 from .utils import detectUser, send_verification_email, send_password_reset_email
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
+
 
 from vendor.models import Vendor
 from django.template.defaultfilters import slugify
@@ -42,7 +45,7 @@ def registerUser(request):
             # Send verification email
             send_verification_email(request, user)
 
-            messages.success(request, "Your account has been registered successfully")
+            messages.success(request, "Your account has been registered successfully. We sent you an email to confirm registration!")
             return redirect('registerUser')
         else:
             print(form.errors)
@@ -83,7 +86,7 @@ def registerVendor(request):
             # Send verification email
             send_verification_email(request, user)
 
-            messages.success(request, "Your account has been registered successfully. Please wait for approval!")
+            messages.success(request, "Your account has been registered successfully. Please activate your account by email!")
             return redirect("registerVendor")
         else:
             messages.error(request, form.errors)
