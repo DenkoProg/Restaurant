@@ -3509,7 +3509,17 @@ ul.user-controls li:first-child i { color: #0f0851; }
 .woocommerce .cart-collaterals .cart_totals { width: 100%; }
 .woocommerce form.woocommerce-ordering { width: 100%; margin-top: 20px; padding: 0 15px; }
 .woocommerce p.woocommerce-result-count { width: 100%; padding: 0 15px; }
+.a.get-start-btn{display: block; margin-top: 15px !important;margin-left: 0 !important;}
+.main-search-bar{padding-top: 100px !important;padding-bottom: 50px !important;background-position: left !important;}
+.user-dashboard{width: 100% !important;}
+.menu-itam-holder .quantity{right: 0 !important;margin-top: -30px !important;}
+.table.opening_hours{width: 100% !important;}
+.table td{padding: 0.5rem !important;}
 }
+
+table td, table th{line-height: 1rem !important;}
+
+.btn-info{ background: none !important; border: none !important;}
 /* Shop Responsive Style End */
 .woocommerce-page .place-order .page-section {display:none;}
 .woocommerce .place-order button.button:hover {background: #c33332;}
