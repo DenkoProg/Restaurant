@@ -25,11 +25,12 @@ def place_order(request):
             vendors_ids.append(i.fooditem.vendor.id)
 
     get_tax = Tax.objects.filter(is_active=True)
+    subtotal = 0
     total_data = {}
     k = {}
     for i in cart_items:
         fooditem = FoodItem.objects.get(pk=i.fooditem.id, vendor_id__in=vendors_ids)
-        v_id = fooditem.vendor._check_id_field()
+        v_id = fooditem.vendor.id
         if v_id in k:
             subtotal = k[v_id]
             subtotal += (fooditem.price * i.quantity)
@@ -73,7 +74,8 @@ def place_order(request):
             order.payment_method = 'PayPal'
             order.save()
             order.order_number = generate_order_number(order.id)
-            order.vendors.add(*vendors_ids)
+            for vendor_id in vendors_ids:
+                order.vendors.add(vendor_id)
             order.save()
             context = {
                 'order': order,

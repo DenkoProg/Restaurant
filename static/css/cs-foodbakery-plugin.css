@@ -3521,8 +3521,6 @@ ul.user-controls li:first-child i { color: #0f0851; }
 table td, table th{
     line-height: 1rem !important;
 }
-
-.btn-info{ background: none !important; border: none !important;}
 /* Shop Responsive Style End */
 .woocommerce-page .place-order .page-section {display:none;}
 .woocommerce .place-order button.button:hover {background: #c33332;}
